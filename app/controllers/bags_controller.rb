@@ -14,8 +14,10 @@ class BagsController < ApplicationController
     end
   
     def show
-      redirect_to user_bags_path if @bag.nil?
-      @bag = Bag.find_by(id: params[:bag_id])
+      @user = User.find_by(id: params[:user_id])
+      @bag = Bag.find_by(id: params[:id])
+      @makeup_products_in_this_bag = @bag.makeups
+      binding.pry
     end
   
     def new
@@ -27,7 +29,6 @@ class BagsController < ApplicationController
       @user = current_user
       @bag = @user.bags.build(bag_params)
       if @bag.save
-        binding.pry
         redirect_to user_bags_path, alert: "Yay! We just made your Glam Bag"
       else
         @alert = "Please make your product selections."

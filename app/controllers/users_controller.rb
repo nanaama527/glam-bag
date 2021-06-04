@@ -9,12 +9,12 @@ class UsersController < ApplicationController
         # else
         #     @user = User.order(:name)
         # end
-        @users = User.all
+        @users = User.alphabet
     end
 
     def show
         @user = User.find_by(params[:user_id])
-        
+
 
     end
 

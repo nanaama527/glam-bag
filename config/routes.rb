@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   #   resources :bags, only: [:new, :create, :edit, :update, :destroy]
   # end
   
+  resources :makeup_bags
+
   resources :users, only: [:index, :new, :create, :show] do
     resources :bags 
     resources :makeup_bags

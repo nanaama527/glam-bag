@@ -1,11 +1,9 @@
 <% @users.each do |user| %>
     <ul>
         <%= user.name %>
-    </ul>
         <% user.bags.each do |bag| %>
-    <ul>
-        <% bag %>
-    </ul>
+    <li>  <%= link_to bag.name, user_bag_path(user, bag) %>  </li>
     <% end %>
+    </ul>
 <% end %>
 

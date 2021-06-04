@@ -19,13 +19,12 @@ class MakeupBagsController < ApplicationController
     def new
       @user = current_user
       @makeup_bag = MakeupBag.new
-      binding.pry
     end
   
     def create
-      @makeup_bag = MakeupBag.new(bag_params)
+      @makeup_bag = MakeupBag.new(makeup_bag_params)
       if @makeup_bag.save
-        redirect_to new_makeup_bags_path, alert: "Yay! We just made your Glam Bag"
+        redirect_to new_makeup_bag_path, alert: "Yay! We just made your Glam Bag"
       else
         @alert = "Please make your product selections."
         @errors = @makeup_bag.errors.full_messages
@@ -56,12 +55,12 @@ class MakeupBagsController < ApplicationController
     private
   
     def set_makeup_bag
-      @makeup_bag = Makeup_Bag.find_by(id: params[:id])
+      @makeup_bag = MakeupBag.find_by(id: params[:bag_id])
     end
   
   
     def makeup_bag_params
-      params.require(:bag).permit(:user_id, :makeupbag_id)
+      params.require(:makeup_bag).permit(:bag_id, :makeup_id, :store_location, :price, :quantity)
     end
 end
 
