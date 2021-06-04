@@ -1,0 +1,17 @@
+<div class="card bg-dark text-white">
+  <div class="card-img-overlay text-center mt-5">
+
+    <% if flash[:alert] %>
+      <div class="alert alert-light alert-dismissible fade show mx-auto" style="width:300px;" role="alert">
+        <%= flash[:alert] %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+
+    <h1 class="card-title mt-5 mb-3"><strong>My Glam Bag</strong></h1>
+    <p class="card-text lead mb-1 fw-normal">Where we can shop and swap for glam, your way!</p>
+    <p class="card-text lead fw-normal">Ready to make your own glam?</p>
+    <!--<hr class="my-4">-->
+    <p class="mt-4">Stay cute and glam, till we meet again!!!</p>
+    <%= link_to "Bag Check!", new_user_bag_path, class: "btn btn-warning btn-lg mt-3 px-4" %>
+  </div>
+</div>

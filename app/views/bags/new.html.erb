@@ -1,0 +1,12 @@
+<h1 class="h3 mb-3 fw-normal">Let's Make a New Bag!</h1>
+
+    <%= form_with model: [@user, @bag] do |f| %>  
+
+
+    <div class="form-floating">
+        <%= f.text_field :name, class: "form-control", id: "floatingName", placeholder: "Bag Name" %>
+        <%= f.label :name, for: "floatingName" %>
+      </div>
+        <%= f.submit "Make My Bag!", class:"w-100 btn btn-lg btn-primary" %>
+      </div>
+    <% end %>

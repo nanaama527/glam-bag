@@ -1,0 +1,2 @@
+module MakeupBagsHelper
+end

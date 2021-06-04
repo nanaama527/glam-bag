@@ -1,0 +1,31 @@
+<div class="checkbox mt-4 mb-2">
+  <% if current_user && current_user.admin %>
+    <label>
+      <%= f.check_box :admin %> Check to make this user admin
+    </label>
+  <% end %>
+</div>
+
+<%= form_for @user, url: signup_path do |f| %>
+<%= render partial: 'form', locals: {user: @user, f: f} %>
+
+<div class="form-floating">
+  <%= f.text_field :name, class: "form-control", id: "floatingName", placeholder: "John Doe" %>
+  <%= f.label :name, for: "floatingName" %>
+</div>
+<div class="form-floating">
+  <%= f.email_field :email, class: "form-control", id: "floatingEmail", placeholder: "name@example.com" %>
+  <%= f.label :email, for: "floatingEmail" %>
+</div>
+
+
+<% if @alert %>
+      <h3><%= @alert %></h3>
+        <% @errors.each do |m| %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <%= m %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+    <% end %>
+    <!--%= image_tag "My-Glam-Bag-Logo-03-Square-Black.png", alt: "logo", width: "75", height: "75" %>
+    --->

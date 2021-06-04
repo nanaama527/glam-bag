@@ -1,0 +1,44 @@
+<section class="d-flex align-items-center" style="height: 93.5vh; width: 100vw;">
+  <main class="form-signin text-center m-auto" style="width: 100%; max-width: 330px; padding: 15px;">
+
+    <% if @alert %>
+      <h3><%= @alert %></h3>
+        <% @errors.each do |m| %>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <%= m %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+    <% end %>
+
+    <h1 class="h3 mb-3 fw-normal">Please Log In</h1>
+
+        <%= form_with url: '/login' do |f| %>
+        <%= f.label :email %>
+        <%= f.text_field :email %><br>
+
+        <br>
+    
+        <%= f.label :password %>
+        <%= f.password_field :password %><br>
+
+        <br><br>
+    
+        <%= f.submit "Login🌀💫" %>
+    <% end %>
+
+
+  </main>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+

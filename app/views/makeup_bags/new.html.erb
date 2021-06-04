@@ -1,0 +1,21 @@
+<h1 class="h3 mb-3 fw-normal">Let's Get Some New Glam!</h1>
+
+<%= form_with model: @makeup_bag do |f| %>
+
+    <%= f.collection_select :bag_id, Bag.all, :id, :name %>
+    
+        <%= f.label :name, "What Bag is This? 😄" %>
+        <%= f.text_field :name %>
+    
+    
+    <%= f.collection_select :makeup_id, Makeup.all, :id, :name %>
+
+    
+        <br><br>
+
+            <%= f.submit "✨🙌✨Let's Give It a Try!✨🙌✨" %>
+
+        <br><br>
+
+<% end %>
+

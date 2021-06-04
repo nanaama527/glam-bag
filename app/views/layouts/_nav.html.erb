@@ -1,0 +1,21 @@
+<%= link_to "Sign In via Google", "/auth/google_oauth2", method: :post, class: "btn btn-success btn-lg mb-3 mx-2" %>
+
+<ul>
+
+<% if !logged_in? %>
+
+    <li><%= link_to "Sign Up", new_user_path %></li>
+    <li><%= link_to "Log In",  login_path    %></li>
+
+<% else %>
+
+    <h2> ✨🙌 Hey <%= current_user.name %>! 🙌✨</h2>
+    <li><%= link_to "Log Out", logout_path,  method: :delete %></li>
+    
+<% end %>
+
+</ul>
+
+
+<br><br>
+

@@ -1,0 +1,33 @@
+
+<section class="d-flex align-items-center" style="height: 93.5vh; width: 100vw;">
+  <main class="form-signin text-center mx-auto" style="width: 100%; max-width: 330px; padding: 15px;">
+
+  
+    <h1 class="h3 mb-3 fw-normal">Please Sign Up</h1>
+
+    <%= form_with model: @user do |f| %>  
+
+
+    <div class="form-floating">
+        <%= f.text_field :name, class: "form-control", id: "floatingName", placeholder: "First Name" %>
+        <%= f.label :name, for: "floatingName" %>
+      </div>
+      <div class="form-floating">
+        <%= f.text_field :username, class: "form-control", id: "floatingUsername", placeholder: "Username" %>
+        <%= f.label :username, for: "floatingUsername" %>
+      </div>
+      <div class="form-floating">
+        <%= f.email_field :email, class: "form-control", id: "floatingEmail", placeholder: "Email" %>
+        <%= f.label :email, for: "floatingEmail" %>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field :password, class: "form-control", id: "floatingPassword", placeholder: "Password" %>
+        <%= f.label :password, for: "floatingPassword" %>
+      </div>
+      <div>
+        <%= f.submit "Sign Up", class:"w-100 btn btn-lg btn-primary" %>
+      </div>
+    <% end %>
+
+  </main>
+</section>

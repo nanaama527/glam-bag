@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Glam Bag</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+
+  <%= render 'layouts/nav' %>
+  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="https://www.myglambag.com/" target="_blank">
+          <%= image_tag "My Glam Bag-Logo-03-Square-Black.png", alt: "logo", width: "30", height: "30" %>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to "Home", root_path, class: "nav-link fw-bold mx-3 active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "My Bag", makeup_bags_path, class: "nav-link fw-bold mx-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "All the Goods", makeups_path, class: "nav-link fw-bold mx-3" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "All the Bags", bags_path, class: "nav-link fw-bold mx-3" %>
+            </li>
+          </ul>
+          <ul class="navbar-nav  mb-2 mb-lg-0">
+            <% if !logged_in? %>
+
+            <li class="navbar-item">
+              <a class="nav-link fw-bold mx-3" href="<%= signup_path %>" data-bs-toggle="modal" data-bs-target="#exampleModal">Sign Up</a>
+            </li>
+            <li class="navbar-item">
+              <a class="nav-link fw-bold mx-3" href="<%= login_path %>">Log In</a>
+            </li>
+
+            <% else %>
+
+            <li class="navbar-item">
+              <% if current_user && current_user.admin %>
+                <a class="nav-link fw-bold mx-3" href="<%= user_path(current_user) %>"><%= current_user.name.titlecase %> <code class="text-danger">[ADMIN]</code></a>
+              <% else %>
+                <a class="nav-link fw-bold mx-3" href="<%= user_path(current_user) %>"><%= current_user.name.titlecase %>'s Glam Bag</a>
+              <% end %>
+            </li>
+            <li class="navbar-item">
+              <a class="nav-link fw-bold mx-3" href="<%= logout_path %>">Log Out</a>
+            </li>
+
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <%= yield %>
+
+    <!-- Modal -->
+    <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog mt-5">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <%= image_tag "My Glam Bag-Logo-03-Square-Black.png", alt: "logo", width: "75", height: "75" %>
+            <h1 class="h3 mb-4 fw-normal">Please Sign Up</h1>
+            <%= link_to "Go to Sign Up Page", signup_path, class: "btn btn-primary btn-lg mb-3 mx-2" %>
+             or 
+            <%= link_to "Sign In via Google", "/auth/google_oauth2", method: :post, class: "btn btn-success btn-lg mb-3 mx-2" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
+
+
+~  login ~
+
+<!--%= form_for @user, url: login_path, method: :post do |f| %>
+  <div class="form-floating">
+    <%= f.email_field :email, class: "form-control", id: "floatingEmail", placeholder: "name@example.com" %>
+    <%= f.label :email, for: "floatingEmail" %>
+  </div>
+  <div class="form-floating">
+    <%= f.password_field :password, class: "form-control", id: "floatingPassword", placeholder: "**********" %>
+    <%= f.label :password, for: "floatingPassword" %>
+  </div>
+  <div>
+    <%= f.submit "Log In", class:"w-100 btn btn-lg btn-primary" %>
+  </div>
+  <p class="my-3 text-muted">&copy; 2021</p>
+<% end %>
+
+
+
+
+
+
+~ nav stuff~
+
+<br><br>
+
+
+
+
+<ul>
+
+<% if !logged_in? %>
+
+    <li><%= link_to "Sign Up", new_user_path %></li>
+    <li><%= link_to "Log In",  login_path    %></li>
+
+<% else %>
+
+    <h2> ✨🙌 Hey <%= current_user.name %>! 🙌✨</h2>
+    <li><%= link_to "Log Out", logout_path,  method: :delete %></li>
+    
+<% end %>
+
+</ul>
+
+
+<br><br>
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+<br><br>
+
+
+
+
+
+
+
+~oauth stuff
+<!%= button_to "Log In with Google", '/auth/google_oauth2' %>
+  <!%= render 'layouts/nav' %>
+
+
+
+
+
+show page~
+
+<div class="container d-flex align-items-center" style="height: 93.5vh; width: 100vw;">
+  <div class="text-center m-auto" style="width: 100%;">
+    <% if flash[:alert] %>
+      <div class="alert alert-success alert-dismissible fade show mx-auto mb-5" style="width:300px;" role="alert">
+        <%= flash[:alert] %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    <h1 class="text-decoration-underline mb-4">User Info</h1>
+    <h3>User Name: <%= @user.username %></h3>
+    <p class="lead">Email: <%= @user.email %></p>
+    <p><small class="muted"><%= "( Your temporary password is [ #{session[:tmp_password]} ]. Please change your password. )" if session[:tmp_password] %></small></p>
+    <%= link_to "Edit User Info", edit_user_path, class: "btn btn-dark mx-2", style: "width: 200px;" %> <%= link_to "Change Password", edit_password_path, class: "btn btn-light mx-2", style: "width: 200px;" %>
+    <p>
+      <%= link_to "The Glam Bags", makeup_bags_path(params[:id]), class: "btn btn-outline-primary btn-lg my-4 mx-2" %>
+   <div class="container d-flex align-items-center" style="height: 93.5vh; width: 100vw;">
+  <div class="text-center m-auto" style="width: 100%;">
+    <% if flash[:alert] %>
+      <div class="alert alert-success alert-dismissible fade show mx-auto mb-5" style="width:300px;" role="alert">
+        <%= flash[:alert] %><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    <h1 class="text-decoration-underline mb-4">User Info</h1>
+    <!--h3>User Name: <%= @user.name %></!--h3>
+    --->
+    <p class="lead">Email: <%= @user.email %></p>
+    
+    <p><small class="muted"><%= "( Your temporary password is [ #{session[:tmp_password]} ]. Please change your password. )" if session[:tmp_password] %></small></p>
+    <%= link_to "Edit User Info", edit_user_path, class: "btn btn-dark mx-2", style: "width: 200px;" %> <%= link_to "Change Password", edit_password_path, class: "btn btn-light mx-2", style: "width: 200px;" %>
+    <p>
+      <%= link_to "User Events", user_events_path(params[:id]), class: "btn btn-outline-primary btn-lg my-4 mx-2" %>
+  
+      <%= link_to "Delete User", @user, class: "btn btn-outline-danger btn-lg my-4 mx-2", method: :delete, data: { confirm: 'Are you certain you want to delete this user?' } %>
+      <% end %>
+    </p>
+
+
+      <hr>
+      <p>
+        <%= link_to "User List", users_path, class: "btn btn-warning btn-lg mt-4 mx-2", style: "width: 200px;" %>
+        <%= link_to "Event List", events_path, class: "btn btn-success btn-lg mt-4 mx-2", style: "width: 200px;" %>
+      </p>
+    <% end %>
+
+  </div>
+</div>
+   <% if current_user.admin && current_user != @user %>
+      <%= link_to "Delete User", @user, class: "btn btn-outline-danger btn-lg my-4 mx-2", method: :delete, data: { confirm: 'Are you certain you want to delete this user?' } %>
+      <% end %>
+    </p>
+
+    <% if current_user.admin %>
+      <hr>
+      <p>
+        <%= link_to "User List", users_path, class: "btn btn-warning btn-lg mt-4 mx-2", style: "width: 200px;" %>
+        <%= link_to "The Bags", bags_path, class: "btn btn-success btn-lg mt-4 mx-2", style: "width: 200px;" %>
+      </p>
+    <% end %>
+
+  </div>
+</div>

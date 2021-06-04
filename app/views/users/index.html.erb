@@ -1,0 +1,11 @@
+<% @users.each do |user| %>
+    <ul>
+        <%= user.name %>
+    </ul>
+        <% user.bags.each do |bag| %>
+    <ul>
+        <% bag %>
+    </ul>
+    <% end %>
+<% end %>
+
