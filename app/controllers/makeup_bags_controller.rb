@@ -1,8 +1,5 @@
 class MakeupBagsController < ApplicationController
-    # before_action :set_bag, only: [:show, :edit, :update ,:destroy]
-    # before_action :redirect_if_not_logged_in, only: [:new, :create, :edit, :update, :destroy]
-    # before_action :redirect_if_not_admin, only: [:new, :create, :edit, :update, :destroy]
-  
+    
     def index
       if params[:user_id]
         @makeup_bags = User.find_by(id: params[:user_id]).bags.order(name: :desc, makeupbag_id: :desc, user_id: :desc)
@@ -64,4 +61,4 @@ class MakeupBagsController < ApplicationController
     end
 end
 
-# end
+

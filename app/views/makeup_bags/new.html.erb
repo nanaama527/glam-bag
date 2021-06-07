@@ -19,3 +19,7 @@
 
 <% end %>
 
+<% if logged_in? %>
+    <h4> <%= link_to "Take me to my bags!", user_bags_path(current_user) %>
+    </h4>
+<% end %>

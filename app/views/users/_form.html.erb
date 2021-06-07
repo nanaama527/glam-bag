@@ -1,10 +1,3 @@
-<div class="checkbox mt-4 mb-2">
-  <% if current_user && current_user.admin %>
-    <label>
-      <%= f.check_box :admin %> Check to make this user admin
-    </label>
-  <% end %>
-</div>
 
 <%= form_for @user, url: signup_path do |f| %>
 <%= render partial: 'form', locals: {user: @user, f: f} %>

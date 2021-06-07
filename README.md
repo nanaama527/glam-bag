@@ -1,24 +1,34 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+My Glam Bag Rails App
+by Nana Nkansah-Siriboe
 
-Things you may want to cover:
+# How To Set Up the App
 
-* Ruby version
+Visit my Github repository and clone the code to your local directory:
+git clone https://github.com/nanaama527/glam-bag.git
 
-* System dependencies
+Enter into the glam-bag folder: cd glam-bag.
+Execute bundle install and run rails s in terminal.
+Then, open your browser at http://localhost:3000/.
 
-* Configuration
+# How To Use the App
 
-* Database creation
+You can either sign up for your own account or use the existing accounts to log in (You can also sign in via your Google account).
 
-* Database initialization
+Before logging in, you still can see a user list aand their glam bags listed with them, but you are unable to make reservations.
 
-* How to run the test suite
+If you log in as normal user (test@users.com, password: 123), you can create, update, and delete your own glam bag.
 
-* Services (job queues, cache servers, search engines, etc.)
+Each user has access to his/her own profile (user info, bag info, add to bag option) through the link displayed on the page.
 
-* Deployment instructions
+# Contributing
 
-* ...
+Bug reports and pull requests are welcome on GitHub at https://github.com/nanaama527/glam-bag. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+
+# Contributors
+Nana Nkansah-Siriboe
+License & Copyright
+© Nana Nkansah-Siriboe
+
+The app is available as open source under the terms of the MIT License.
