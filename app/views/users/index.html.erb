@@ -1,3 +1,6 @@
+
+
+
 <% @users.each do |user| %>
     <ul>
         <%= user.name %>
@@ -8,6 +11,9 @@
 <% end %>
 
 <% if logged_in? %>
+    <h3>
+        <%= link_to "Take me to my bags!", user_bags_path(current_user), class: "btn btn-outline-success btn-lg my-3" %>
+    </h3>
     <h3>
         <%= link_to "Create A New Bag", new_user_bag_path(current_user), class: "btn btn-outline-success btn-lg my-3" %>
     </h3>

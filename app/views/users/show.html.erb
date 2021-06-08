@@ -1,2 +1,9 @@
 <h2> ✨🙌 Hey <%= current_user.name %>! 🙌✨</h2>
 
+<% if current_user %>
+    <div class="text-center">
+      <h3>
+      <%= link_to "Create A New Bag", new_user_bag_path, class: "btn btn-outline-success btn-lg my-3" %>
+      </h3>
+    </div>
+<% end %>

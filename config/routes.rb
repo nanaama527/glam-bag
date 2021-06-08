@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   #   resources :bags, only: [:new, :create, :edit, :update, :destroy]
   # end
   
+  #'/bags/:bag_id/makeup_bags/new'
+  resources :bags, only: [:new, :create] do
+    resources :makeup_bags
+    resources :makeup
+  end
+
   resources :makeup_bags
+
 
   resources :users, only: [:index, :new, :create, :show] do
     resources :bags 

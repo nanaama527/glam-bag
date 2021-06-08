@@ -10,7 +10,7 @@
 </ul>
 
 <% if logged_in? %>
-    <h4> <%= link_to "Let's add some products to your bag!", new_makeup_bag_path(current_user) %>
+    <h4> <%= link_to "Let's add some products to your bag!", new_bag_makeup_bag_path(@bag) %>
     </h4>
     <h4> <%= link_to "Take me to my bags!", user_bags_path(current_user) %>
     </h4>

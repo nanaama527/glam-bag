@@ -1,8 +1,10 @@
 <div class="container">
 
-    <h1 class="text-center mt-5 mb-3"> <%= current_user.name %>'s bag! 🙌✨ </h1>
-
-  <% if current_user %>
+    <% if logged_in? %>
+      <h1 class="text-center mt-5 mb-3"> <%= @user.name %>'s bag! 🙌✨ </h1>
+    <% end %>
+  
+  <% if @user %>
     <div class="text-center">
       <h3>
       <%= link_to "Create A New Bag", new_user_bag_path, class: "btn btn-outline-success btn-lg my-3" %>
@@ -11,29 +13,30 @@
   <% end %>
   <% if @bags.empty? %>
     <div class="container text-center mt-5">
-      <%= link_to "Bag Check!", bags_path, class: "btn btn-outline-primary btn-lg px-5 py-3" %>  
+      <%= link_to "Bag Check!", user_bags_path(current_user), class: "btn btn-outline-primary btn-lg px-5 py-3" %>  
     </div>
   <% end %>
 
   <div class="accordion mb-3" id="accordionExample">
     
-    <% @bags.each_with_index do |bag, i| %>
+    <% @bags.each do |bag| %>
       
     <div class="accordion-item">
-      <h2 class="accordion-header" id="heading_<%=i%>">
-          <%= link_to bag.name, user_bag_path(current_user, bag) %>
+      <h2> 
+          <%= link_to bag.name, user_bag_path(@user, bag) %>
       </h2>
-      <div id="collapse_<%=i%>" class="accordion-collapse collapse" aria-labelledby="heading_<%=i%>" data-bs-parent="#accordionExample">
         <div class="accordion-body text-center mx-auto gap-5">
-        
-            <%= link_to "Delete", user_bag_path(current_user, bag), class: "btn btn-danger btn-lg mx-3 px-5", style: "width: 150px;", method: :delete, data: { confirm: 'Are you certain you want to delete this bag?' } %>
-    
+            <%= link_to "Delete", user_bag_path(@user, bag), class: "btn btn-danger btn-lg mx-3 px-5", style: "width: 150px;", method: :delete, data: { confirm: 'Are you certain you want to delete this bag?' } %>
         </div>
       </div>
     </div>
 
     
     <% end %>
+
+    <h3>
+      <%= link_to "Wanna see all the bags?", users_path, class: "btn btn-outline-success btn-lg my-3" %>
+    </h3>
 
   </div>
 

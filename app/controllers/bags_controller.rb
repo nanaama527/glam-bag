@@ -5,10 +5,9 @@ class BagsController < ApplicationController
   
     def index
       if params[:user_id]
-        @user = current_user
-        @bags = Bag.all
+        @user = User.find_by(id: params[:user_id])
+        @bags = @user.bags
       else
-        binding.pry
         redirect_to user_path(@user)
       end
     end
@@ -17,29 +16,34 @@ class BagsController < ApplicationController
       @user = User.find_by(id: params[:user_id])
       @bag = Bag.find_by(id: params[:id])
       @makeup_products_in_this_bag = @bag.makeups
-      binding.pry
+  
     end
   
     def new
-      @user = current_user
+      @user = User.find_by(id: params[:user_id])
       @bag = @user.bags.build
     end
   
     def create
-      @user = current_user
+      @user = User.find_by(id: params[:user_id])
       @bag = @user.bags.build(bag_params)
       if @bag.save
         redirect_to user_bags_path, alert: "Yay! We just made your Glam Bag"
       else
-        @alert = "Please make your product selections."
+       flash[:alert]  = "Please make your product selections."
         @errors = @bag.errors.full_messages
-        binding.pry
         render 'new'
       end
     end
   
     def edit 
-         
+      @bag = Bag.find_by(id: params[:id])
+      if logged_in? && (current_user.id == @bag.user_id)
+        @bag.edit
+      else
+        flash[:alert] = "Umm... that's not your bag, Glam babe. You can only edit bags that are yours. try again."
+      end
+      redirect_to users_path
     end
   
     def update    
@@ -54,8 +58,13 @@ class BagsController < ApplicationController
     end
   
     def destroy
-      @bags.destroy
-      redirect_to bags_path
+      @bag = Bag.find_by(id: params[:id])
+      if logged_in? && (current_user.id == @bag.user_id)
+        @bag.destroy
+      else
+        @alert = "Umm... that's not your bag, Glam babe. You can only delete bags that are yours. try again."
+      end
+      redirect_to users_path
     end
   
   
